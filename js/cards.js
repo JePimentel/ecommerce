@@ -1,5 +1,5 @@
 import { products } from '../data/products.js'
-import { cartShopping } from './cartShopping.js'
+import { cartShoppingProducts } from './cartShoppingProducts.js'
 
 export function cards () {
     const productsCards = document.querySelector('.productsCards')
@@ -22,7 +22,8 @@ export function cards () {
     audiStock.textContent = JSON.parse(localStorage.getItem('audiStock')).length
 
     let allProducts = []
-    let productsAdded = JSON.parse(localStorage.getItem('productsAdded'))
+    let productsAdded = []
+    console.log(productsAdded)
     productsQuantity.textContent = JSON.parse(localStorage.getItem('productsAdded'))
     
     const cleanContainer = (container) => {
@@ -30,9 +31,9 @@ export function cards () {
     }
 
     const showNumberOfProductsAdded = () => {
-        let quantity = JSON.parse(localStorage.getItem('productsAdded')).length
+        let quantity = JSON.parse(localStorage.getItem('productsAdded'))
         quantity ? 
-        productsQuantity.textContent = quantity 
+        productsQuantity.textContent = quantity.length
         : 
         productsQuantity.textContent = '0'
     }
@@ -47,10 +48,10 @@ export function cards () {
             node.childNodes[3].childNodes[5].addEventListener('click', (e) => {
                 const edition = e.path[2].childNodes[3].childNodes[1].textContent
                 const product = items.find(item => item.edition === edition)
-                productsAdded = [...productsAdded, product]
+                productsAdded.push(product)
                 localStorage.setItem('productsAdded', JSON.stringify(productsAdded))
                 showNumberOfProductsAdded()
-                cartShopping()
+                cartShoppingProducts()
             })
         })
     }

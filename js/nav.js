@@ -1,3 +1,5 @@
+import { cartShoppingProducts } from "./cartShoppingProducts.js"
+
 export function navBar () {
     const menuHandler = document.querySelector('#menuHandler')
     const shoppingCartHandler = document.querySelector('#shoppingCartHandler')
@@ -10,6 +12,7 @@ export function navBar () {
     const contents = document.querySelectorAll('#content')
     const options = document.querySelectorAll('#option')
     const nav = document.querySelector('nav')
+
 
     if (nav) {
     window.addEventListener('scroll', () => {
@@ -71,7 +74,10 @@ export function navBar () {
 
     menuHandler.addEventListener('click', () => showMenu() )
 
-    shoppingCartHandler.addEventListener('click', () => showShoppingCart())
+    shoppingCartHandler.addEventListener('click', () => {
+        showShoppingCart()
+        cartShoppingProducts()
+    })
 
     closeCartButton.addEventListener('click', () => removeShoppingCart())
 }

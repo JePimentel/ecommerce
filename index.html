@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <title>Ecommerce - Jpimentel</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="#newProductsSection" class="navLogoContainer">
+                <picture>
+                    <img src="./images/logo_academlo.png" alt="Agency logo">
+                </picture>
+                <h2>JPimentel</h2>
+            </a>
+
+            <section class="navOptions">
+                <picture>
+                    <img src="./images/icons/moon.png" alt="">
+                </picture>
+                <picture id="shoppingCartHandler">
+                    <img src="./images/icons/shopping-cart.png" alt="">
+                <span id="productsQuantity">0</span>
+                </picture>
+                <picture>
+                    <img id="menuHandler" src="./images/icons/two-lines.png" alt="">
+                </picture>
+            </section>
+        </nav>
+        <section class="menuNav">
+            <ul>
+                <li> <a id="option" href="#newProductsSection">HOME</a> </li>
+                <li> <a id="option" href="#productsSection">PRODUCTS</a> </li>
+            </ul>
+        </section>
+        <section class="cartShopping">
+            
+        </section>
+    </header>
+    <main id="content">
+        <section id="newProductsSection" class="newProductsSection">
+            <picture>
+                <img src="./images/tesla.png"  alt="">
+            </picture>
+            <div class="newProductsInfo">
+                <h1>New Tesla model X 2023</h1>
+                <span>
+                    Driving has never been so satisfying, 
+                    get our new model with many more features and feel
+                    technology's magic.
+                </span>
+                <p>$14.00</p>
+                <div>
+                    <a href="#">Discover</a>
+                    <button type="submit">ADD TO CART</button>
+                </div>
+            </div>
+        </section>
+        <section class="brandsSection">
+            <picture>
+                <img src="./images/teslaLogo.png" alt="logo de tesla">
+                <span>Tesla</span>
+            </picture>
+            <picture>
+                <img src="./images/bmwLogo.png" alt="logo de bmw">
+                <span>BMW</span>
+                
+            </picture>
+            <picture>
+                <img src="./images/mercedesLogo.png" alt="logo de mercedes">
+                <span>Mercedes</span>
+
+            </picture>
+            <picture>
+                <img src="./images/audiLogo.png" alt="logo de audi">
+                <span>Audi</span>
+            </picture>
+        </section>
+        <section id="#productsSection" class="productsSection">
+            <div class="filters">
+                <div class="filter allFilter">
+                    <h3>Show all</h3>
+                    <p><span id="allStock"></span> products</p>
+                </div>
+                <div class="filter teslaFilter">
+                    <h3>Tesla</h3>
+                    <p><span id="teslaStock"></span> products</p>
+                </div>
+                <div class="filter bmwFilter">
+                    <h3>BMW</h3>
+                    <p><span id="bmwStock"></span> products</p>
+                </div>
+                <div class="filter mercedesFilter">
+                    <h3>Mercedes</h3>
+                    <p><span id="mercedesStock"></span> products</p>
+                </div>
+                <div class="filter audiFilter">
+                    <h3>Audi</h3>
+                    <p><span id="audiStock"></span> products</p>
+                </div>
+            </div>
+            <div class="productsCards">
+                
+            </div>
+        </section>
+    </main>
+    <footer id="content">
+        <div class="ancles">
+            <ul>
+                <li>
+                    <h3>Our information</h3>
+                </li>
+                <li><span>Sinaloa - México</span></li>
+            </ul>
+            <ul class="aboutUsFooter">
+                <li>
+                    <h3>About us</h3>
+                </li>
+                <li><span>Support center</span></li>
+                <li><span>Customer support</span></li>
+                <li><span>Copy Right</span></li>
+            </ul>
+            <ul class="productsFooter">
+                <li>
+                    <h3>Products</h3>
+                </li>
+                <li><span>Hoodies</span></li>
+                <li><span>Shirts</span></li>
+                <li><span>Sweatshirts</span></li>
+            </ul>
+            <ul class="socialFooter">
+                <li>
+                    <h3>Social</h3>
+                </li>
+                <li>
+                    <picture>
+                        <img src="./images/icons/facebook.png" alt="">
+                        <img src="./images/icons/twitter.png" alt="">
+                        <img src="./images/icons/instagram.png" alt="">
+                    </picture>
+                </li>
+            </ul>
+        </div>
+        <span class="foot"> &#169; Jpimentel All rights reserved</span>
+    </footer>
+</body>
+<script src="./js/main.js" type="module"></script>
+</html>

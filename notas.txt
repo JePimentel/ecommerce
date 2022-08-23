@@ -1,0 +1,29 @@
+localStorage.setItem('key', 'value') --- con la funcion setItem agregamos una nueva propiedad al localstorage (cuando quiera agregar objetos tengo que mandarlo así ... JSON.stringify(obj)
+
+localStorage.getItem('key') --- para obtener el valor de la llave que le mandemos. Si el valor es un objeto, tengo que traerlo de la siguiente manera ... const data = JSON.parse(localStorage.getItem('key')) 
+
+light -- <i class="fa-brands fa-facebook-f"></i>
+dark  -- <i class="fa-brands fa-facebook-f"></i>
+
+color dark del logo filter : invert(1);
+color de fondo del body :#1f1d2a (dark)
+color de fondo del nav: #1B1A23 (dark)
+color azul primario : #051f42 (modo light)
+color azul primario : #9adde0 (modo dark)
+
+auto {
+    edition: '',
+    price: '',
+    brand: '',
+    model: '',
+    stock: 0
+}
+
+click derecho y menu principal
+
+red 
+
+en TCP/Ip
+
+cambiar enlace puerta
+192.168.0.11         

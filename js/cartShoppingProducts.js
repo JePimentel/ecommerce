@@ -1,35 +1,65 @@
 import { cartEmpty } from "./cartEmpty.js"
+import { deleteProductButtons } from "./deleteProductButtons.js"
+import { cards } from "./cards.js"
+import { substractOrAddProduct } from "./subtractOrAddProduct.js"
 
-export function cartShoppingProducts () {
+export function cartShoppingProducts() {
     let cartShoppingContainer = document.querySelector('.cartShopping')
+    let buyButton
     let productsAdded = JSON.parse(localStorage.getItem('productsAdded'))
-    let closeCart
-    let deleteButton
+
     let allProductsAdded = ''
     cartShoppingContainer.innerHTML = ''
+    let productsNotNull = []
 
-    const listenButtonDelete = () => {
-        deleteButton = document.querySelectorAll('.delete')
-        let deleteButtonArray = [...deleteButton]
-        deleteButtonArray.forEach(button => {
-            button.addEventListener('click', (e) => {
-                let editionProduct = e.path[1].childNodes[5].childNodes[1].textContent
-                const products = productsAdded.filter(item => item != null && item.edition === editionProduct)
-                productsAdded = products
-                localStorage.setItem('productsAdded', JSON.stringify(productsAdded))
-                generateProducts()
-                cartShoppingProducts()
+
+    productsAdded = JSON.parse(localStorage.getItem('productsAdded'))
+
+    const total = (items) => {
+        let itemsTotal = 0
+        items.forEach(item => itemsTotal += item.quantity)
+        const totals = document.querySelector('.totals')
+        const totalItems = document.querySelector('.totalItems')
+        totalItems.textContent = items.length > 1 ? `${itemsTotal} products` : `${itemsTotal} product`
+        let sum = 0
+        items.forEach(item => {
+            sum += item.price * item.quantity
+        })
+        totals.textContent = `$${sum.toLocaleString('en')}`
+
+    }
+
+    const buy = () => {
+        buyButton = document.querySelector('.buy')
+        buyButton.addEventListener('click', () => {
+            const productsToBuy = JSON.parse(localStorage.getItem('productsAdded'))
+            const products = JSON.parse(localStorage.getItem('products'))
+            let productsModify
+            products.map(product => {
+                const productFinded = productsToBuy.find(productToFind => productToFind['edition'] === product['edition'])
+                if (productFinded) {
+                    console.log(product['stock'])
+                    console.log(product['quantity'])
+                    product['stock'] = product['stock'] - product['quantity']
+                    product['quantity'] = 1
+                    console.log(product['stock'])
+                    product['subtotal'] = product['price']
+                }
             })
+            productsModify = [...products]
+            localStorage.setItem('productsAdded', JSON.stringify([]))
+            localStorage.setItem('products', JSON.stringify(productsModify))
+            cards()
+            cartShoppingProducts()
         })
     }
 
-    const generateProducts = () => {
-        productsAdded = JSON.parse(localStorage.getItem('productsAdded'))
-        console.log(productsAdded)
-        if (productsAdded) {
-            cartShoppingContainer.innerHTML = ''
-            productsAdded.forEach(product => {
-                allProductsAdded += `
+    if (productsAdded != 0) {
+        productsNotNull = productsAdded.filter(item => item != null && item != undefined)
+        localStorage.setItem('productsAdded', JSON.stringify(productsNotNull))
+        cartShoppingContainer.innerHTML = ''
+        productsNotNull.forEach(product => {
+            allProductsAdded += `
                 <div class="product">
                     <img class="delete" src="./images/icons/delete.png" alt="">
                     <picture class="productImage">
@@ -39,45 +69,47 @@ export function cartShoppingProducts () {
                         <p class="productAddedEdition">${product.edition}</p>
                         <div class="stockAndPrice">
                             <span>Stock: ${product.stock}</span>
-                            <span>$${product.price}</span>
+                            <span>$${parseInt(product.price).toLocaleString('en')}</span>
                         </div>
-                        <span class="subtotal">Subtotal: $2,000,000.00</span>
+                        <span class="subtotal">Subtotal: $${parseInt(product.subtotal).toLocaleString('en')}</span>
                         <div class="addOrRemove">
-                            <picture>
+                            <picture class="substract">
                                 <img src="./images/icons/removeShoppingCart.png" alt="">
                             </picture>
-                            <p>1</p>
-                            <picture>
+                            <p>${product.quantity}</p>
+                            <picture class="add">
                                 <img src="./images/icons/addShoppingCart.png" alt="">
                             </picture>
                         </div>
                     </div>
                 </div>
                 `
-                listenButtonDelete()
-            })
+        })
 
-            cartShoppingContainer.innerHTML = `
-            <div class="closeCart">
+        cartShoppingContainer.innerHTML = `
+            <div class="closeCartProducts">
                 <picture>
                     <img src="./images/icons/close.png" alt="">
                 </picture>
+                <button class="buy">Buy</button>
             </div>
             <h2>My Cart</h2>
             <div class="productsAdded">
                 ${allProductsAdded}
             </div>
             <div class="total">
-                <span>0 items</span>
-                <p>$0.00</p>
+                <span class="totalItems">0 items</span>
+                <p class="totals">$0.00</p>
             </div>
             `
-        } else {
-            cartShoppingContainer.innerHTML = cartEmpty()
-        }
-    }
-    generateProducts()
 
-    listenButtonDelete()
+        substractOrAddProduct()
+        total(productsNotNull)
+        buy()
+    } else {
+        cartShoppingContainer.innerHTML = cartEmpty()
+        cards()
+    }
+    deleteProductButtons()
 
 }

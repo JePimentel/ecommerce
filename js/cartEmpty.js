@@ -1,4 +1,4 @@
-export function cartEmpty () {
+export function cartEmpty() {
     return `
         <div class="closeCart">
             <picture>

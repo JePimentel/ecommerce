@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/main.css">
     <title>Ecommerce - Jpimentel</title>
@@ -22,18 +23,21 @@
                 </picture>
                 <h2>JPimentel</h2>
             </a>
-
             <section class="navOptions">
                 <picture>
-                    <img src="./images/icons/moon.png" alt="">
+                    <img src="./images/icons/moon.png" alt="Mood">
                 </picture>
                 <picture id="shoppingCartHandler">
-                    <img src="./images/icons/shopping-cart.png" alt="">
-                <span id="productsQuantity">0</span>
+                    <img src="./images/icons/shopping-cart.png" alt="Shopping cart">
+                    <span id="productsQuantity">0</span>
                 </picture>
-                <picture>
+                <picture class="menuHandler">
                     <img id="menuHandler" src="./images/icons/two-lines.png" alt="">
                 </picture>
+                <div class="optionsDesk">
+                    <a id="homeLink" href="#newProductsSection">HOME</a>
+                    <a id="productsLink" href="#productsSection">PRODUCTS</a>
+                </div>
             </section>
         </nav>
         <section class="menuNav">
@@ -43,18 +47,18 @@
             </ul>
         </section>
         <section class="cartShopping">
-            
+
         </section>
     </header>
     <main id="content">
         <section id="newProductsSection" class="newProductsSection">
             <picture>
-                <img src="./images/tesla.png"  alt="">
+                <img src="./images/tesla.png" alt="">
             </picture>
             <div class="newProductsInfo">
                 <h1>New Tesla model X 2023</h1>
                 <span>
-                    Driving has never been so satisfying, 
+                    Driving has never been so satisfying,
                     get our new model with many more features and feel
                     technology's magic.
                 </span>
@@ -73,7 +77,7 @@
             <picture>
                 <img src="./images/bmwLogo.png" alt="logo de bmw">
                 <span>BMW</span>
-                
+
             </picture>
             <picture>
                 <img src="./images/mercedesLogo.png" alt="logo de mercedes">
@@ -85,7 +89,7 @@
                 <span>Audi</span>
             </picture>
         </section>
-        <section id="#productsSection" class="productsSection">
+        <section id="productsSection" class="productsSection">
             <div class="filters">
                 <div class="filter allFilter">
                     <h3>Show all</h3>
@@ -109,7 +113,7 @@
                 </div>
             </div>
             <div class="productsCards">
-                
+
             </div>
         </section>
     </main>
@@ -154,4 +158,5 @@
     </footer>
 </body>
 <script src="./js/main.js" type="module"></script>
+
 </html>

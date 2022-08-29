@@ -7,6 +7,7 @@ export function localStorageApp () {
     const mercedesProducts = products.filter(product => product.brand === 'Mercedes')
     const all = teslaProducts.length + audiProducts.length + bmwProducts.length + mercedesProducts.length
 
+    localStorage.setItem('products', JSON.stringify(products))
     localStorage.setItem('allStock', JSON.stringify(all))
     localStorage.setItem('teslaStock', JSON.stringify(teslaProducts))
     localStorage.setItem('audiStock', JSON.stringify(audiProducts))

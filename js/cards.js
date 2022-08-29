@@ -1,7 +1,10 @@
-import { products } from '../data/products.js'
 import { cartShoppingProducts } from './cartShoppingProducts.js'
+import { deleteProductButtons } from './deleteProductButtons.js'
+import { showNumberOfProductsAdded } from './showNumberOfProductsAdded.js'
+import { substractOrAddProduct } from './subtractOrAddProduct.js'
 
-export function cards () {
+export function cards() {
+    const products = JSON.parse(localStorage.getItem('products'))
     const productsCards = document.querySelector('.productsCards')
     const allStock = document.querySelector('#allStock')
     const teslaStock = document.querySelector('#teslaStock')
@@ -13,7 +16,6 @@ export function cards () {
     const bmwFilter = document.querySelector('.bmwFilter')
     const mercedesFilter = document.querySelector('.mercedesFilter')
     const audiFilter = document.querySelector('.audiFilter')
-    const productsQuantity = document.querySelector('#productsQuantity')
 
     allStock.textContent = localStorage.getItem('allStock')
     teslaStock.textContent = JSON.parse(localStorage.getItem('teslaStock')).length
@@ -21,37 +23,78 @@ export function cards () {
     mercedesStock.textContent = JSON.parse(localStorage.getItem('mercedesStock')).length
     audiStock.textContent = JSON.parse(localStorage.getItem('audiStock')).length
 
-    let allProducts = []
-    let productsAdded = []
-    console.log(productsAdded)
+    let allProducts = JSON.parse(localStorage.getItem('productsAdded'))
+    let productsAdded = allProducts
     productsQuantity.textContent = JSON.parse(localStorage.getItem('productsAdded'))
-    
+
     const cleanContainer = (container) => {
         container.innerHTML = ''
     }
+    /*
+     Esta funcion (addListenerToAddButton) agrega el evento 'click'
+     a cada uno de los botones para agregar al carrito de las tarjetas,
+      y a su vez agrega el producto a un arreglo que se manda al local storage.
 
-    const showNumberOfProductsAdded = () => {
-        let quantity = JSON.parse(localStorage.getItem('productsAdded'))
-        quantity ? 
-        productsQuantity.textContent = quantity.length
-        : 
-        productsQuantity.textContent = '0'
-    }
-
-    // Esta funcion (addListenerToAddButton) agrega el evento 'click'
-    // a cada uno de los botones para agregar al carrito de las tarjetas
-    //  y a su vez agrega el producto a un arreglo que se manda al local storage.
-    const addListenerToAddButton = (products, items) => {  
-        const nodesArray = [...products.children]         
-
+    También valida si el producto ya se encuentra en el carrito, si está en el carrito,
+    agrega uno más a la cantidad.
+    */
+    const addListenerToAddButton = (productsNode, items) => {
+        const nodesArray = [...productsNode.children]
         nodesArray.forEach((node) => {
             node.childNodes[3].childNodes[5].addEventListener('click', (e) => {
                 const edition = e.path[2].childNodes[3].childNodes[1].textContent
                 const product = items.find(item => item.edition === edition)
-                productsAdded.push(product)
-                localStorage.setItem('productsAdded', JSON.stringify(productsAdded))
-                showNumberOfProductsAdded()
-                cartShoppingProducts()
+                console.log(product.stock)
+                if (product.stock > 0) {
+                    if (productsAdded != null) {
+                        productsAdded.push(product)
+                    } else {
+                        productsAdded = [product]
+                    }
+                    if (edition != null) {
+                        const productsNotNull = productsAdded.filter(item => item != null && item != undefined)
+                        localStorage.setItem('productsAdded', JSON.stringify(productsNotNull))
+                        let getProductsAdded = JSON.parse(localStorage.getItem('productsAdded'))
+                        let productsEdited = []
+                        getProductsAdded.forEach(item => {
+                            if (productsEdited.length != 0) {
+                                const finded = productsEdited.filter(productToFind => productToFind.edition === item.edition)
+                                if (finded.length != 0) {
+                                    if (finded.length > 1) {
+                                        finded.pop()
+                                        productsEdited.forEach(items2 => {
+                                            if (items2.quantity < items2.stock) {
+                                                if (finded[0].edition === items2.edition) {
+                                                    items2['quantity'] += 1
+                                                    items2['subtotal'] = items2['price'] * items2['quantity']
+                                                }
+                                            }
+                                        })
+                                    } else if (finded[0]['quantity'] >= 1) {
+                                        productsEdited.forEach(items2 => {
+                                            if (items2.quantity < items2.stock) {
+                                                if (finded[0].edition === items2.edition) {
+                                                    items2['quantity'] += 1
+                                                    items2['subtotal'] = items2['price'] * items2['quantity']
+                                                }
+                                            }
+                                        })
+                                    } else {
+                                        productsEdited.push(finded[0])
+                                    }
+                                } else {
+                                    productsEdited.push(item)
+                                }
+                            } else {
+                                productsEdited.push(item)
+                            }
+                        })
+
+                        localStorage.setItem('productsAdded', JSON.stringify(productsEdited))
+                    }
+                    showNumberOfProductsAdded()
+                    cartShoppingProducts()
+                }
             })
         })
     }
@@ -66,7 +109,7 @@ export function cards () {
                     </picture>
                     <div class="productCardInfo">
                         <div class="priceAndStock">
-                            <p>$${product.price}</p>
+                            <p>$${parseInt(product.price).toLocaleString('en')}</p>
                             <span>Stock: ${product.stock}</span>
                         </div>
                         <div class="characteristics">
@@ -77,7 +120,7 @@ export function cards () {
                             </div>
                         </div>
                         <picture class="addToCartButton">
-                            <img src="./images/icons/plus.png" alt="">
+                            <img src="./images/icons/plus.png" alt="add to cart">
                         </picture>
                     </div>
                 </div>
@@ -85,7 +128,7 @@ export function cards () {
         })
         addListenerToAddButton(productsCards, items)
     }
-
+    console.log(navigator.userAgent)
     generateCards(products)
     showNumberOfProductsAdded()
 

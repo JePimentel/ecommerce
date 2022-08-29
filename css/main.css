@@ -81,6 +81,7 @@ main {
     margin-right: 20px;
     width: 18px;
     transition: all ease 500ms;
+    cursor: pointer;
 }
 
 .navOptions picture:nth-child(2) {
@@ -111,10 +112,10 @@ main {
     position: fixed;
     z-index: 2;
     top: 60px;
-    right: -550px;
+    right: -100%;
     width: 100%;
     height: calc(100vh - 60px);
-    background-color: var(--whitePrimary);
+    background-color: #f2f2f2;
     transition: all ease 300ms;
     text-align: center;
 }
@@ -124,10 +125,34 @@ main {
     height: 50px;
 }
 
+
 .closeCart picture {
     position: absolute;
     top: 10px;
     right: 20px;
+}
+
+.closeCartProducts {
+    position: relative;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 22px;
+}
+
+.closeCartProducts picture {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.closeCartProducts button {
+    padding: 7px 22px;
+    border: none;
+    background-color: #1dd01d;
+    color: var(--whitePrimary);
+    font-weight: 400;
+    border-radius: 12px;
 }
 
 .cartEmpty {
@@ -275,6 +300,12 @@ main {
     position: relative;
     padding: var(--paddingContent);
     height: 100vh;
+    max-width: 1020px;
+    margin:0 auto;
+}
+
+.newProductsSection button{
+    cursor: pointer;
 }
 
 .newProductsSection picture {
@@ -297,7 +328,7 @@ main {
 .newProductsSection .newProductsInfo {
     position: relative;
     z-index: 1;
-    padding-right: 20px;
+    padding: 0 10px 0 0;
 }
 
 .newProductsInfo h1 {
@@ -363,7 +394,7 @@ main {
 }
 
 .productsSection {
-    margin: 70px 0 ;
+    margin: 70px 0 120px;
 
 }
 
@@ -378,6 +409,7 @@ main {
 .filter {
     text-align: center;
     margin: 5px;
+    cursor: pointer;
 }
 
 .filter h3 {
@@ -392,7 +424,7 @@ main {
     display: flex;
     align-items: center;
     overflow-x: scroll;
-    height: 350px;
+    height: 360px;
 }
 
 .productsCards::-webkit-scrollbar {
@@ -412,10 +444,14 @@ main {
     box-shadow: 0 1px 1px var(--blackPrimary);
 }
 
+.productCard .addToCartButton {
+    cursor: pointer;
+}
+
 .productCard .productImage {
     display: inline-block;
     width: 80%;
-    margin: 22px auto;
+    margin: auto;
 }
 
 .productCard .productImage img{
@@ -518,4 +554,118 @@ footer .foot {
     text-align: center;
     color: hsl(0deg 1% 51%);
     padding: 40px 0 30px;
+}
+
+.navOptions .optionsDesk {
+    display: none;
+    padding-right: 12px;
+}
+
+.navOptions .optionsDesk a {
+    padding: 0 10px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #262626;
+}
+
+/* .navOptions .optionsDesk a:nth-child(1) {
+    color: var(--red);
+} */
+
+
+@media (min-width: 500px) {
+    .menuNav {
+        display: none;
+    }
+    .navOptions .optionsDesk {
+        display: block;
+    }
+    .navOptions picture:nth-child(3) {
+        display: none;
+    }
+
+    header .cartShopping {
+        width: 70%;
+        transition: all ease 300ms;
+    }
+    .filter {
+        margin: 5px 20px;
+    }
+    .brandsSection {
+        justify-content: space-evenly;
+    }
+    .brandsSection picture {
+        width: 15%;
+    }
+}
+
+@media (min-width: 600px) {
+    .newProductsSection .newProductsInfo {
+        padding: 0 80px 0 50px;
+    }
+    .newProductsSection picture {
+        width: 60%;
+        transition: all ease 300ms;
+
+    }
+    header .cartShopping {
+        width: 60%;
+    }
+}
+
+@media (min-width: 700px) {
+    body {
+        font-size: 1.6rem;
+    }
+    .brandsSection picture {
+        width: 10%;
+        
+    }
+}
+
+@media (min-height: 700px) {
+    .newProductsSection {
+        height: 70vh;
+    }
+}
+
+@media (min-width: 750px) {
+    .newProductsSection .newProductsInfo {
+        padding: 0 100px 0 100px;
+    }
+    .newProductsSection picture {
+        display: flex;
+        justify-content: center;
+    }
+    .newProductsSection picture img {
+        width: 85%;
+    }
+}
+
+@media (min-width: 800px) {
+    footer .ancles {
+        justify-content: space-around;
+    }
+}
+
+@media (min-width: 1020px) {
+    .productsCards::-webkit-scrollbar {
+        display: block;
+    }
+    .productsCards::-webkit-scrollbar-thumb {
+        background-color: var(--blackPrimary);
+        border-radius: 12px;
+    }
+    .productsCards::-webkit-scrollbar-button {
+        display: none;
+    }
+}
+
+@media (min-width: 1200px) {
+    .brandsSection picture {
+        width: 6%;
+    }
+    header .cartShopping {
+        width: 30%;
+    }
 }

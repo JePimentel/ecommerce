@@ -111,5 +111,4 @@ export function cartShoppingProducts() {
         cards()
     }
     deleteProductButtons()
-
 }

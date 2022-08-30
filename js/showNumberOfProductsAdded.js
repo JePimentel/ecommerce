@@ -3,7 +3,7 @@ export function showNumberOfProductsAdded() {
 
     let quantity = JSON.parse(localStorage.getItem('productsAdded'))
     let noNullNoUndifined
-    if (quantity) {
+    if (quantity.lenght > 0) {
         noNullNoUndifined = quantity.filter(item => item != undefined)
         let ProductsQuantity = 0
         noNullNoUndifined.forEach(item => ProductsQuantity += item.quantity)
